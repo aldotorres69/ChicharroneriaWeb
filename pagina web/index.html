@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chicharronería El Secreto del Sabor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Estado abierto/cerrado -->
+  <div class="status-bar">
+    <span id="open-status"></span>
+  </div>
+
+  <header>
+    <div class="logo">
+      <!-- Logo SVG básico -->
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="30" fill="#F54927" stroke="#fff" stroke-width="4"/>
+        <ellipse cx="32" cy="38" rx="18" ry="14" fill="#fff4e1"/>
+        <ellipse cx="24" cy="32" rx="4" ry="3" fill="#fff4e1"/>
+        <ellipse cx="40" cy="32" rx="4" ry="3" fill="#fff4e1"/>
+        <rect x="22" y="17" width="20" height="12" rx="6" fill="#fff"/>
+        <ellipse cx="32" cy="17" rx="10" ry="7" fill="#fff"/>
+        <ellipse cx="32" cy="42" rx="7" ry="5" fill="#f5b8a1"/>
+        <circle cx="28" cy="38" r="2" fill="#333"/>
+        <circle cx="36" cy="38" r="2" fill="#333"/>
+      </svg>
+    </div>
+    <h1>Chicharronería El Secreto del Sabor</h1>
+    <p class="slogan">¡Despierta tu paladar con el auténtico secreto del sabor peruano!</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#sandwich">Sándwiches</a></li>
+      <li><a href="#chicharron">Chicharrón y Relleno</a></li>
+      <li><a href="#tamales">Tamales</a></li>
+      <li><a href="#bebidascalientes">Bebidas Calientes</a></li>
+      <li><a href="#bebidasfrias">Bebidas Frías</a></li>
+      <li><a href="#locales">Locales</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="sandwich" class="menu-category">
+      <h2><span>🥪</span> Sándwiches</h2>
+      <ul class="menu-list">
+        <li>
+          <span>Pan con chicharrón</span>
+          <span>S/. 7.00</span>
+          <button onclick="addToCart('Pan con chicharrón', 7)">Agregar</button>
+        </li>
+        <li>
+          <span>Pan con relleno</span>
+          <span>S/. 7.00</span>
+          <button onclick="addToCart('Pan con relleno', 7)">Agregar</button>
+        </li>
+        <li>
+          <span>Pan con tamal</span>
+          <span>S/. 5.00</span>
+          <button onclick="addToCart('Pan con tamal', 5)">Agregar</button>
+        </li>
+        <li>
+          <span>Pan con camote</span>
+          <span>S/. 3.00</span>
+          <button onclick="addToCart('Pan con camote', 3)">Agregar</button>
+        </li>
+      </ul>
+    </section>
+
+    <section id="chicharron" class="menu-category">
+      <h2><span>🍖</span> Chicharrón y Relleno por Peso</h2>
+      <div class="subcat">
+        <h3>Chicharrón <span>(camote, cancha y salsa criolla)</span></h3>
+        <ul class="menu-list">
+          <li>
+            <span>1/4 KG</span><span>S/. 20.00</span>
+            <button onclick="addToCart('1/4 KG Chicharrón', 20)">Agregar</button>
+          </li>
+          <li>
+            <span>1/2 KG</span><span>S/. 40.00</span>
+            <button onclick="addToCart('1/2 KG Chicharrón', 40)">Agregar</button>
+          </li>
+          <li>
+            <span>3/4 KG</span><span>S/. 60.00</span>
+            <button onclick="addToCart('3/4 KG Chicharrón', 60)">Agregar</button>
+          </li>
+          <li>
+            <span>1 KG</span><span>S/. 80.00</span>
+            <button onclick="addToCart('1 KG Chicharrón', 80)">Agregar</button>
+          </li>
+        </ul>
+      </div>
+      <div class="subcat">
+        <h3>Relleno <span>(con camote)</span></h3>
+        <ul class="menu-list">
+          <li>
+            <span>1/4 KG</span><span>S/. 13.00</span>
+            <button onclick="addToCart('1/4 KG Relleno', 13)">Agregar</button>
+          </li>
+          <li>
+            <span>1/2 KG</span><span>S/. 25.00</span>
+            <button onclick="addToCart('1/2 KG Relleno', 25)">Agregar</button>
+          </li>
+          <li>
+            <span>1 KG</span><span>S/. 48.00</span>
+            <button onclick="addToCart('1 KG Relleno', 48)">Agregar</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="tamales" class="menu-category">
+      <h2><span>🌽</span> Tamales Criollos</h2>
+      <ul class="menu-list">
+        <li>
+          <span>Chancho / Pollo</span><span>S/. 4.00</span>
+          <button onclick="addToCart('Tamal Chancho / Pollo', 4)">Agregar</button>
+        </li>
+      </ul>
+    </section>
+
+    <section id="bebidascalientes" class="menu-category">
+      <h2><span>☕</span> Bebidas Calientes</h2>
+      <ul class="menu-list">
+        <li>
+          <span>Café Pasado</span><span>S/. 3.00</span>
+          <button onclick="addToCart('Café Pasado', 3)">Agregar</button>
+        </li>
+        <li>
+          <span>Café c/ leche</span><span>S/. 5.00</span>
+          <button onclick="addToCart('Café c/ leche', 5)">Agregar</button>
+        </li>
+        <li>
+          <span>Milo c/ leche</span><span>S/. 5.00</span>
+          <button onclick="addToCart('Milo c/ leche', 5)">Agregar</button>
+        </li>
+        <li>
+          <span>Leche sola</span><span>S/. 4.00</span>
+          <button onclick="addToCart('Leche sola', 4)">Agregar</button>
+        </li>
+        <li>
+          <span>Té, anís o manzanilla</span><span>S/. 3.00</span>
+          <button onclick="addToCart('Té, anís o manzanilla', 3)">Agregar</button>
+        </li>
+      </ul>
+    </section>
+
+    <section id="bebidasfrias" class="menu-category">
+      <h2><span>🥤</span> Bebidas Frías</h2>
+      <ul class="menu-list">
+        <li>
+          <span>Vaso de chicha</span><span>S/. 3.00</span>
+          <button onclick="addToCart('Vaso de chicha', 3)">Agregar</button>
+        </li>
+        <li>
+          <span>1/2 lt Chicha morada</span><span>S/. 5.00</span>
+          <button onclick="addToCart('1/2 lt Chicha morada', 5)">Agregar</button>
+        </li>
+        <li>
+          <span>Coca Cola/Inca Kola (600ml)</span><span>S/. 5.00</span>
+          <button onclick="addToCart('Coca Cola/Inca Kola (600ml)', 5)">Agregar</button>
+        </li>
+        <li>
+          <span>Agua San Luis</span><span>S/. 3.00</span>
+          <button onclick="addToCart('Agua San Luis', 3)">Agregar</button>
+        </li>
+        <li>
+          <span>Coca Cola/Inca Kola (1lt)</span><span>S/. 9.00</span>
+          <button onclick="addToCart('Coca Cola/Inca Kola (1lt)', 9)">Agregar</button>
+        </li>
+        <li>
+          <span>1 lt Chicha morada</span><span>S/. 10.00</span>
+          <button onclick="addToCart('1 lt Chicha morada', 10)">Agregar</button>
+        </li>
+      </ul>
+    </section>
+
+    <section id="locales">
+      <h2>Locales y Contacto</h2>
+      <div class="local">
+        <h3>Local 1: Av. Los Incas 752, Comas 15316</h3>
+        <a href="https://wa.me/51928688178" class="wsp-btn" target="_blank">Pedir por WhatsApp</a>
+        <iframe src="https://www.google.com/maps?q=Av+Los+Incas+752,+Comas+15316&output=embed" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen></iframe>
+      </div>
+      <div class="local">
+        <h3>Local 2: Los Pinos 1309, Comas 15316</h3>
+        <a href="https://wa.me/51928688178" class="wsp-btn" target="_blank">Pedir por WhatsApp</a>
+        <iframe src="https://www.google.com/maps?q=Los+Pinos+1309,+Comas+15316&output=embed" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- Carrito flotante -->
+  <div class="cart-float" onclick="toggleCart()">
+    🛒 <span id="cart-count">0</span>
+  </div>
+
+  <!-- Carrito de compras -->
+  <div id="cart-modal" class="cart-modal">
+    <div class="cart-content">
+      <h2>🛒 Mi pedido</h2>
+      <ul id="cart-items"></ul>
+      <p id="cart-total"></p>
+      <div>
+        <label><input type="radio" name="tipo" value="Comer en local" checked> Comer en local</label>
+        <label><input type="radio" name="tipo" value="Para llevar"> Para llevar</label>
+      </div>
+      <div>
+        <label for="local-select">¿Dónde recoger?</label>
+        <select id="local-select">
+          <option value="Av. Los Incas 752, Comas 15316">Local 1: Av. Los Incas 752</option>
+          <option value="Los Pinos 1309, Comas 15316">Local 2: Los Pinos 1309</option>
+        </select>
+      </div>
+      <button onclick="confirmarPedido()">Confirmar pedido</button>
+      <button onclick="toggleCart()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Boleta -->
+  <div id="boleta-modal" class="boleta-modal">
+    <div class="boleta-content" id="boleta-content">
+      <!-- Contenido generado por JS -->
+    </div>
+  </div>
+
+  <footer>
+    <p>Horario: Lunes a Sábado de 7:00am a 12:00pm</p>
+    <p>Síguenos en <a href="#">Facebook</a> | <a href="#">Instagram</a></p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
