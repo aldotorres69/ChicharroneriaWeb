@@ -1,0 +1,11 @@
+.card img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: .2em;
+  box-shadow: 0 1px 8px #f5492735;
+  background: #fff4e1;
+  border: 2px solid #fff4e1;
+  display: block;
+}
