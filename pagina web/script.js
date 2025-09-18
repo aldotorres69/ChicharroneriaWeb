@@ -105,7 +105,7 @@ function mostrarBoleta(tipo, local) {
 
   let html = `
     <div class="boleta-logo">
-      <img src="logo-cerdito.png" alt="Logo El Secreto del Sabor">
+      <img src="Images/logo-cerdito.png" alt="Logo El Secreto del Sabor">
     </div>
     <h2>Boleta de Pedido</h2>
     <ul class="boleta-list">`;
@@ -141,3 +141,4 @@ function enviarPedidoWhatsApp() {
   window.open('https://wa.me/51928688178?text=' + encodeURIComponent(mensaje));
 
 }
+
