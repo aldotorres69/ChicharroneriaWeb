@@ -1,0 +1,174 @@
+<!-- Sándwiches -->
+<div class="product-cards">
+  <div class="card">
+    <img src="Panchicharron.png" alt="Pan con chicharrón">
+    <span class="prod-name">Pan con chicharrón</span>
+    <span class="prod-price">S/. 7.00</span>
+    <button onclick="addToCart('Pan con chicharrón', 7)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Pan-con-relleno.png" alt="Pan con relleno">
+    <span class="prod-name">Pan con relleno</span>
+    <span class="prod-price">S/. 7.00</span>
+    <button onclick="addToCart('Pan con relleno', 7)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Pan-con-tamal.png" alt="Pan con tamal">
+    <span class="prod-name">Pan con tamal</span>
+    <span class="prod-price">S/. 5.00</span>
+    <button onclick="addToCart('Pan con tamal', 5)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Pan-con-camote.png" alt="Pan con camote">
+    <span class="prod-name">Pan con camote</span>
+    <span class="prod-price">S/. 3.00</span>
+    <button onclick="addToCart('Pan con camote', 3)">Agregar</button>
+  </div>
+</div>
+
+<!-- Chicharrón y Relleno por Peso -->
+<div class="product-cards">
+  <div class="card">
+    <img src="Chicharron.png" alt="Chicharrón">
+    <span class="prod-name">1/4 KG Chicharrón</span>
+    <span class="prod-price">S/. 20.00</span>
+    <button onclick="addToCart('1/4 KG Chicharrón', 20)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Chicharron.png" alt="Chicharrón">
+    <span class="prod-name">1/2 KG Chicharrón</span>
+    <span class="prod-price">S/. 40.00</span>
+    <button onclick="addToCart('1/2 KG Chicharrón', 40)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Chicharron.png" alt="Chicharrón">
+    <span class="prod-name">3/4 KG Chicharrón</span>
+    <span class="prod-price">S/. 60.00</span>
+    <button onclick="addToCart('3/4 KG Chicharrón', 60)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Chicharron.png" alt="Chicharrón">
+    <span class="prod-name">1 KG Chicharrón</span>
+    <span class="prod-price">S/. 80.00</span>
+    <button onclick="addToCart('1 KG Chicharrón', 80)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="relleno.png" alt="Relleno">
+    <span class="prod-name">1/4 KG Relleno</span>
+    <span class="prod-price">S/. 13.00</span>
+    <button onclick="addToCart('1/4 KG Relleno', 13)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="relleno.png" alt="Relleno">
+    <span class="prod-name">1/2 KG Relleno</span>
+    <span class="prod-price">S/. 25.00</span>
+    <button onclick="addToCart('1/2 KG Relleno', 25)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="relleno.png" alt="Relleno">
+    <span class="prod-name">1 KG Relleno</span>
+    <span class="prod-price">S/. 48.00</span>
+    <button onclick="addToCart('1 KG Relleno', 48)">Agregar</button>
+  </div>
+</div>
+
+<!-- Tamales -->
+<div class="product-cards">
+  <div class="card">
+    <img src="Tamal.png" alt="Tamal">
+    <span class="prod-name">Tamal</span>
+    <span class="prod-price">S/. 4.00</span>
+    <select id="tamales-tipo">
+      <option value="pollo">Pollo</option>
+      <option value="chancho">Chancho</option>
+    </select>
+    <button onclick="addTamalToCart()">Agregar</button>
+  </div>
+</div>
+
+<!-- Bebidas Calientes -->
+<div class="product-cards">
+  <div class="card">
+    <img src="Cafe-pasado.png" alt="Café Pasado">
+    <span class="prod-name">Café Pasado</span>
+    <span class="prod-price">S/. 3.00</span>
+    <button onclick="addToCart('Café Pasado', 3)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Cafe-con-leche.png" alt="Café con leche">
+    <span class="prod-name">Café c/ leche</span>
+    <span class="prod-price">S/. 5.00</span>
+    <button onclick="addToCart('Café c/ leche', 5)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Milo-con-leche.png" alt="Milo con leche">
+    <span class="prod-name">Milo c/ leche</span>
+    <span class="prod-price">S/. 5.00</span>
+    <button onclick="addToCart('Milo c/ leche', 5)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="leche.png" alt="Leche sola">
+    <span class="prod-name">Leche sola</span>
+    <span class="prod-price">S/. 4.00</span>
+    <button onclick="addToCart('Leche sola', 4)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Te.png" alt="Té, Manzanilla o Anís">
+    <span class="prod-name">Té, Manzanilla o Anís</span>
+    <span class="prod-price">S/. 3.00</span>
+    <select id="te-tipo">
+      <option value="Té">Té</option>
+      <option value="Manzanilla">Manzanilla</option>
+      <option value="Anís">Anís</option>
+    </select>
+    <button onclick="addTeToCart()">Agregar</button>
+  </div>
+</div>
+
+<!-- Bebidas Frías -->
+<div class="product-cards">
+  <div class="card">
+    <img src="Chicha-morada.png" alt="Vaso de chicha">
+    <span class="prod-name">Vaso de chicha</span>
+    <span class="prod-price">S/. 3.00</span>
+    <button onclick="addToCart('Vaso de chicha', 3)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Chicha-morada.png" alt="Chicha morada">
+    <span class="prod-name">1/2 lt Chicha morada</span>
+    <span class="prod-price">S/. 5.00</span>
+    <button onclick="addToCart('1/2 lt Chicha morada', 5)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Chicha-morada.png" alt="Chicha morada">
+    <span class="prod-name">1 lt Chicha morada</span>
+    <span class="prod-price">S/. 10.00</span>
+    <button onclick="addToCart('1 lt Chicha morada', 10)">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="gaseosas.png" alt="Gaseosa 600ml">
+    <span class="prod-name">Coca Cola/Inca Kola (600ml)</span>
+    <span class="prod-price">S/. 5.00</span>
+    <select id="cola-tipo-600">
+      <option value="Coca Cola">Coca Cola</option>
+      <option value="Inca Kola">Inca Kola</option>
+    </select>
+    <button onclick="addCola600ToCart()">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="gaseosas.png" alt="Gaseosa 1lt">
+    <span class="prod-name">Coca Cola/Inca Kola (1lt)</span>
+    <span class="prod-price">S/. 9.00</span>
+    <select id="cola-tipo-1lt">
+      <option value="Coca Cola">Coca Cola</option>
+      <option value="Inca Kola">Inca Kola</option>
+    </select>
+    <button onclick="addCola1ltToCart()">Agregar</button>
+  </div>
+  <div class="card">
+    <img src="Agua-sanluis.png" alt="Agua San Luis">
+    <span class="prod-name">Agua San Luis</span>
+    <span class="prod-price">S/. 3.00</span>
+    <button onclick="addToCart('Agua San Luis', 3)">Agregar</button>
+  </div>
+</div>
