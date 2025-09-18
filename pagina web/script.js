@@ -138,5 +138,6 @@ function enviarPedidoWhatsApp() {
   mensaje += `Opción: ${tipo}\n`;
   mensaje += `Recoger en: ${local}\n`;
 
-  window.open('https://wa.me/51999999999?text=' + encodeURIComponent(mensaje));
+  window.open('https://wa.me/51928688178?text=' + encodeURIComponent(mensaje));
+
 }
