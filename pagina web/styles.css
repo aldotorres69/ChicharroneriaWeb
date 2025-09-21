@@ -139,7 +139,7 @@ main h2 { text-align: center; font-size: 2rem; color: #F54927; margin-top: 2.5re
 .primary-btn { background-color: #25D366; color: #fff }
 .secondary-btn { background-color: #ccc; color: #333 }
 
-/* --- CARRITO FLOTANTE DERECHA --- */
+/* --- CARRITO FLOTANTE --- */
 .cart-float-left {
     position: fixed;
     bottom: 20px;
@@ -176,24 +176,41 @@ main h2 { text-align: center; font-size: 2rem; color: #F54927; margin-top: 2.5re
 /* --- RESPONSIVE DESIGN (MODIFICADO) --- */
 @media (max-width:768px) {
     .main-header { 
-        padding: 0.8rem 1rem;
-    }
-    .header-container {
-        /* Para que no se rompa en pantallas muy pequeñas */
-        flex-direction: row;
-        justify-content: flex-start; /* Alinea al inicio */
-        text-align: left;
+        padding: 0.5rem 1rem;
     }
     .logo { 
-        width: 60px; 
-        height: 60px; 
+        width: 80px; 
+        height: 80px; 
     }
     .brand h1 { 
-        font-size: 1.4rem; 
+        font-size: 1.8rem; 
     }
     .brand .slogan { 
         display: none; 
     }
+    
+    /* El estado del local ahora está dentro de la barra de nav */
+    .status-bar {
+        position: static; /* Ya no es fijo */
+        order: 3; /* Lo mueve al final de la barra de nav */
+        margin-left: 10px; /* Espacio a la izquierda */
+    }
+    
+    #open-status {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        white-space: nowrap; /* Evita que el texto se parta */
+    }
+
+    .category-nav {
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-links {
+        padding: 0;
+        justify-content: flex-start; /* Alinea los links a la izquierda */
+    }
+
     .checkout-body { 
         flex-direction: column-reverse 
     }
@@ -202,9 +219,5 @@ main h2 { text-align: center; font-size: 2rem; color: #F54927; margin-top: 2.5re
     }
     .locales-grid { 
         grid-template-columns: 1fr 
-    }
-    .status-bar { 
-        right: 15px; 
-        top: 10px; 
     }
 }
