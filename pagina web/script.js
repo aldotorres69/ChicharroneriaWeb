@@ -1,151 +1,214 @@
-// --- Estado abierto/cerrado ---
+// --- VARIABLES GLOBALES ---
+let cart = [];
+let deliveryCost = 0;
+const deliveryZones = ["carabayllo", "comas", "olivos", "puente piedra"];
+
+// --- FUNCIONES DEL CARRITO ---
+function addToCart(productName, price) {
+    const existingProduct = cart.find(item => item.name === productName);
+    if (existingProduct) existingProduct.quantity++;
+    else cart.push({ name: productName, price: price, quantity: 1 });
+    showToast(`${productName} fue agregado al carrito.`);
+    updateCartUI();
+}
+function addTeToCart() {
+  const tipo = document.getElementById('te-tipo').value;
+  addToCart(tipo, 3);
+}
+function addCola600ToCart() {
+  const tipo = document.getElementById('cola-tipo-600').value;
+  addToCart(`${tipo} (600ml)`, 5);
+}
+
+// --- FUNCIONES DE LA INTERFAZ (UI) ---
+function showToast(message) {
+    const toast = document.getElementById('add-to-cart-toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+}
+
+// MODIFICADO: Actualiza el botón flotante y el resumen
+function updateCartUI() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const floatBtn = document.getElementById('cart-float-btn');
+    const floatCount = document.getElementById('cart-count-float');
+    
+    if (totalItems > 0) {
+        floatCount.textContent = totalItems;
+        floatBtn.classList.add('show');
+    } else {
+        floatBtn.classList.remove('show');
+    }
+    
+    updateOrderSummary();
+}
+
+function toggleCheckout() {
+    const modal = document.getElementById('checkout-modal');
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+    } else {
+        if (cart.length === 0) {
+            alert("Tu carrito está vacío. ¡Agrega un delicioso chicharrón para continuar!");
+            return;
+        }
+        deliveryCost = 0;
+        updatePaymentInfo();
+        updateOrderSummary();
+        modal.style.display = 'flex';
+    }
+}
+
+// --- LÓGICA DEL CHECKOUT (sin cambios) ---
+function selectDelivery(element, method) {
+    document.querySelectorAll('.delivery-option').forEach(option => option.classList.remove('selected'));
+    element.classList.add('selected');
+    document.getElementById('shipping-method').value = method;
+    const deliveryInfoDiv = document.getElementById('delivery-info');
+    const storeSelector = document.getElementById('store-selector');
+    deliveryCost = 0;
+    if (method === 'Delivery') {
+        deliveryInfoDiv.style.display = 'block';
+        storeSelector.style.display = 'block';
+    } else {
+        deliveryInfoDiv.style.display = 'none';
+        storeSelector.style.display = 'block';
+    }
+    updateOrderSummary();
+}
+function calculateDelivery() {
+    const addressInput = document.getElementById('address');
+    const address = addressInput.value.trim().toLowerCase();
+    const calculateBtn = document.querySelector('.calculate-btn');
+    if (!address) {
+        alert('Por favor, ingresa tu dirección para calcular el costo.');
+        return;
+    }
+    const isZoneValid = deliveryZones.some(zone => address.includes(zone));
+    if (!isZoneValid) {
+        alert('Lo sentimos, solo hacemos delivery a: Comas, Carabayllo, Los Olivos y Puente Piedra.');
+        deliveryCost = 0;
+        updateOrderSummary();
+        return;
+    }
+    calculateBtn.disabled = true;
+    calculateBtn.textContent = 'Calculando...';
+    setTimeout(() => {
+        const travelTime = Math.floor(Math.random() * 36) + 10;
+        deliveryCost = travelTime;
+        alert(`El tiempo de viaje estimado es de ${travelTime} minutos.\nEl costo de envío es de S/ ${deliveryCost.toFixed(2)}.`);
+        updateOrderSummary();
+        calculateBtn.disabled = false;
+        calculateBtn.textContent = 'Calcular costo de envío';
+    }, 1500);
+}
+function updateOrderSummary() {
+    const summaryDetails = document.getElementById('summary-details');
+    const subtotalSpan = document.getElementById('summary-subtotal');
+    const shippingSpan = document.getElementById('summary-shipping');
+    const totalSpan = document.getElementById('summary-total');
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = subtotal + deliveryCost;
+    summaryDetails.innerHTML = cart.length === 0 ? '<p>Tu carrito está vacío.</p>' : '';
+    if (cart.length > 0) {
+        cart.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('summary-item');
+            itemElement.innerHTML = `<span>${item.quantity} x ${item.name}</span><span>s/ ${(item.price * item.quantity).toFixed(2)}</span>`;
+            summaryDetails.appendChild(itemElement);
+        });
+    }
+    subtotalSpan.textContent = `s/ ${subtotal.toFixed(2)}`;
+    shippingSpan.textContent = `s/ ${deliveryCost.toFixed(2)}`;
+    totalSpan.textContent = `s/ ${total.toFixed(2)}`;
+}
+function updatePaymentInfo() {
+    const paymentInfoBox = document.getElementById('payment-info');
+    const selectedRadio = document.querySelector('input[name="payment"]:checked');
+    document.querySelectorAll('.payment-option').forEach(option => option.classList.remove('selected'));
+    selectedRadio.parentElement.classList.add('selected');
+    const selectedPayment = selectedRadio.value;
+    let infoHTML = '';
+    if (selectedPayment === 'Plin/Yape') {
+        infoHTML = `<p><strong>Instrucciones:</strong> Realiza tu pago al número <strong>928 688 178</strong> y envíanos la captura por WhatsApp.</p>`;
+    } else if (selectedPayment === 'Tarjeta') {
+        infoHTML = `<p><strong>Pago con Tarjeta:</strong> Se te enviará un <strong>link de pago</strong> a tu WhatsApp (comisión adicional del 5%).</p>`;
+    }
+    paymentInfoBox.innerHTML = infoHTML;
+}
+function enviarPedido() {
+    const nombre = document.getElementById('name').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    const local = document.getElementById('local-select').value;
+    if (!nombre || !whatsapp) {
+        alert('Por favor, completa tu nombre y número de WhatsApp.');
+        return;
+    }
+    const metodoEntrega = document.getElementById('shipping-method').value;
+    let infoEntrega = '';
+    if (metodoEntrega === 'Delivery') {
+        const direccion = document.getElementById('address').value.trim();
+        if (!direccion) { alert('Por favor, ingresa tu dirección para el delivery.'); return; }
+        if (deliveryCost === 0 && cart.length > 0) { alert('Por favor, calcula el costo de envío antes de continuar.'); return; }
+        infoEntrega = `Delivery a: ${direccion}`;
+    } else {
+        infoEntrega = `Recojo en: ${local}`;
+    }
+    const metodoPago = document.querySelector('input[name="payment"]:checked').value;
+    const subtotal = cart.reduce((acc, el) => acc + el.price * el.quantity, 0);
+    const total = subtotal + deliveryCost;
+    let mensaje = `*¡Nuevo Pedido de Chicharrón!* 🐷\n\n`;
+    mensaje += `*Cliente:* ${nombre}\n*WhatsApp:* ${whatsapp}\n\n`;
+    mensaje += `*Local de Origen:* ${local}\n`;
+    mensaje += `*Método de Entrega:* ${infoEntrega}\n\n`;
+    mensaje += `*Detalle del Pedido:*\n`;
+    cart.forEach(item => {
+        mensaje += `› ${item.quantity} x ${item.name}\n`;
+    });
+    mensaje += `---------------------\n`;
+    mensaje += `*Subtotal:* S/. ${subtotal.toFixed(2)}\n`;
+    if (metodoEntrega === 'Delivery') {
+        mensaje += `*Envío:* S/. ${deliveryCost.toFixed(2)}\n`;
+    }
+    mensaje += `*Total a Pagar:* S/. ${total.toFixed(2)}\n\n`;
+    mensaje += `*Método de Pago:* ${metodoPago}\n`;
+    const numeroTienda = '51928688178'; 
+    const url = `https://wa.me/${numeroTienda}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+}
+
+// --- FUNCIONES DE ESTADO Y SCROLL ---
+function showOpeningHours() {
+    alert('Nuestro horario es de Lunes a Sábado de 7:00am a 12:00pm.');
+}
 function checkOpenStatus() {
   const now = new Date();
   const hour = now.getHours();
-  const minute = now.getMinutes();
-  // Horario: 7:00am a 12:00pm
-  const open = (hour > 7 || (hour === 7 && minute >= 0)) && (hour < 12 || (hour === 12 && minute === 0));
+  const open = (hour >= 7) && (hour < 12);
   const status = document.getElementById('open-status');
+  const clockIcon = '<i class="fas fa-clock"></i>';
   if (open) {
-    status.textContent = '🟢 Abierto';
+    status.innerHTML = `${clockIcon} <span>Local Abierto</span>`;
     status.classList.remove('closed');
+    status.onclick = null;
   } else {
-    status.textContent = '🔴 Cerrado';
+    status.innerHTML = `${clockIcon} <span>Local Cerrado</span>`;
     status.classList.add('closed');
+    status.onclick = showOpeningHours;
   }
 }
-setInterval(checkOpenStatus, 30000);
-checkOpenStatus();
-
-// --- Carrito funcional ---
-let cart = [];
-
-function addToCart(name, price) {
-  const index = cart.findIndex(item => item.name === name);
-  if (index >= 0) {
-    cart[index].qty++;
-  } else {
-    cart.push({ name, price, qty: 1 });
-  }
-  updateCartCount();
-}
-
-function addTamalToCart() {
-  var tipo = document.getElementById('tamales-tipo').value;
-  addToCart('Tamal ' + tipo.charAt(0).toUpperCase() + tipo.slice(1), 4);
-}
-
-function addTeToCart() {
-  var tipo = document.getElementById('te-tipo').value;
-  addToCart(tipo, 3);
-}
-
-function addCola600ToCart() {
-  var tipo = document.getElementById('cola-tipo-600').value;
-  addToCart(tipo + " (600ml)", 5);
-}
-
-function addCola1ltToCart() {
-  var tipo = document.getElementById('cola-tipo-1lt').value;
-  addToCart(tipo + " (1lt)", 9);
-}
-
-function removeFromCart(index) {
-  if (cart[index].qty > 1) {
-    cart[index].qty--;
-  } else {
-    cart.splice(index, 1);
-  }
-  updateCartCount();
-  renderCart();
-}
-
-function updateCartCount() {
-  document.getElementById('cart-count').textContent = cart.reduce((acc, el) => acc + el.qty, 0);
-}
-
-function toggleCart() {
-  const modal = document.getElementById('cart-modal');
-  if (modal.classList.contains('active')) {
-    modal.classList.remove('active');
-  } else {
-    renderCart();
-    modal.classList.add('active');
-  }
-}
-
-function renderCart() {
-  const ul = document.getElementById('cart-items');
-  ul.innerHTML = '';
-  cart.forEach((item, i) => {
-    const li = document.createElement('li');
-    li.innerHTML = `<span>${item.qty} x ${item.name}</span><span>S/. ${(item.price * item.qty).toFixed(2)}</span>
-      <button onclick="removeFromCart(${i})">–</button>`;
-    ul.appendChild(li);
-  });
-  const total = cart.reduce((acc, el) => acc + el.price * el.qty, 0);
-  document.getElementById('cart-total').textContent = `Total: S/. ${total.toFixed(2)}`;
-}
-
-// --- Confirmar pedido y mostrar boleta ---
-function confirmarPedido() {
-  if (!cart.length) {
-    alert('Agrega productos al carrito para hacer tu pedido.');
-    return;
-  }
-  const tipo = document.querySelector('input[name="tipo"]:checked').value;
-  const local = document.getElementById('local-select').value;
-  mostrarBoleta(tipo, local);
-}
-
-function mostrarBoleta(tipo, local) {
-  const modal = document.getElementById('boleta-modal');
-  const content = document.getElementById('boleta-content');
-  const total = cart.reduce((acc, el) => acc + el.price * el.qty, 0);
-
-  let html = `
-    <div class="boleta-logo">
-      <img src="Images/logo-cerdito.png" alt="Logo El Secreto del Sabor">
-    </div>
-    <h2>Boleta de Pedido</h2>
-    <ul class="boleta-list">`;
-  cart.forEach(item => {
-    html += `<li><span>${item.qty} x ${item.name}</span><span>S/. ${(item.price * item.qty).toFixed(2)}</span></li>`;
-  });
-  html += `</ul>
-    <div class="boleta-total">Total: S/. ${total.toFixed(2)}</div>
-    <div>Tipo de pedido: <strong>${tipo}</strong></div>
-    <div>Recoger en: <strong>${local}</strong></div>
-    <button onclick="enviarPedidoWhatsApp()">Enviar pedido por WhatsApp</button>
-    <button onclick="cerrarBoleta()">Cerrar</button>
-  `;
-  content.innerHTML = html;
-  modal.classList.add('active');
-}
-
-function cerrarBoleta() {
-  document.getElementById('boleta-modal').classList.remove('active');
-}
-
-function enviarPedidoWhatsApp() {
-  const tipo = document.querySelector('input[name="tipo"]:checked').value;
-  const local = document.getElementById('local-select').value;
-  let mensaje = `Hola, quiero hacer este pedido:\n`;
-  cart.forEach(item => {
-    mensaje += `${item.qty} x ${item.name} - S/. ${(item.price * item.qty).toFixed(2)}\n`;
-  });
-  mensaje += `Total: S/. ${cart.reduce((acc, el) => acc + el.price * el.qty, 0).toFixed(2)}\n`;
-  mensaje += `Opción: ${tipo}\n`;
-  mensaje += `Recoger en: ${local}\n`;
-
-  window.open('https://wa.me/51928688178?text=' + encodeURIComponent(mensaje));
-}
-
-// --- Dashboard scroll (flechas, pero no se muestran) ---
-function scrollCards(containerId, direction) {
-  const container = document.getElementById(containerId);
-  const card = container.querySelector('.card');
-  if(!card) return;
-  const cardWidth = card.offsetWidth + 24; // +gap
-  container.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
-}
+document.addEventListener('DOMContentLoaded', () => {
+    checkOpenStatus();
+    setInterval(checkOpenStatus, 60000);
+    const nav = document.querySelector('.category-nav');
+    const header = document.querySelector('.main-header');
+    const threshold = header.offsetHeight;
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > threshold) {
+            nav.classList.add('nav-stuck');
+        } else {
+            nav.classList.remove('nav-stuck');
+        }
+    });
+});
