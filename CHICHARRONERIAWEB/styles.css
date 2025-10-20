@@ -66,17 +66,14 @@ body {
 header {
     background-color: rgba(44, 11, 14, 0.85);
     backdrop-filter: blur(10px);
-    padding: 15px 20px;
+    padding: 10px 20px;
     position: sticky;
     top: 0;
     z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 77px;
 }
 .header-content-wrapper {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 .logo {
@@ -92,7 +89,8 @@ header {
     margin-right: 10px;
 }
 #order-info {
-    text-align: left;
+    text-align: right;
+    flex-grow: 1;
 }
 #local-name-display {
     color: #fde047;
@@ -110,9 +108,42 @@ header {
     border-radius: 8px;
     cursor: pointer;
     white-space: nowrap;
+    margin-left: 10px;
 }
-body.order-mode .logo { display: none; }
+
+/* --- ESTILOS PARA INDICADOR DE HORARIO (NUEVO) --- */
+#store-status {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#store-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+}
+.status-open { color: #4ade80; }
+.status-open::before { background-color: #4ade80; }
+.status-closed { color: #f87171; }
+.status-closed::before { background-color: #f87171; }
+
+body.order-mode .logo,
+body.order-mode #store-status {
+    display: none; 
+}
+body.order-mode .header-content-wrapper {
+    width: 100%;
+}
 body.order-mode #cancel-order-btn { display: block; }
+body.order-mode #order-info { text-align: left; }
+
 
 /* --- BARRA DE NAVEGACIÓN DE CATEGORÍAS --- */
 .category-nav-container {
