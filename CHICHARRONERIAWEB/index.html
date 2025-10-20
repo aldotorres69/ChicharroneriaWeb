@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Secreto del Sabor - Menú</title>
+    <link rel="icon" type="image/png" href="images/favicon.png"> 
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- PANTALLA DE BIENVENIDA (ACTUALIZADA) -->
+    <div id="splash-screen" class="splash">
+        <div class="splash-logo-container">
+            <!-- NUEVO LOGO PRINCIPAL -->
+            <img src="images/logo-principal.png" alt="El Secreto del Sabor" class="splash-main-logo">
+        </div>
+        <button id="enter-menu-btn">Ver Menú</button>
+    </div>
+
+    <div class="container">
+        <!-- CABECERA FIJA (CON TU AJUSTE DE LOGO) -->
+        <header>
+            <div class="header-content-wrapper">
+                <div class="logo">
+                    <!-- LOGO AÑADIDO POR TI -->
+                    <img src="images/logo-cerdito.png" alt="Logo" class="header-logo">
+                    <span>El Secreto<br>del Sabor</span>
+                </div>
+                <div id="order-info">
+                     <p id="local-name-display"></p>
+                </div>
+            </div>
+            <button id="cancel-order-btn" class="cancel-order-button" onclick="exitOrderMode()">Cancelar Pedido</button>
+        </header>
+
+        <!-- NAVEGACIÓN DE CATEGORÍAS FIJA -->
+        <div id="category-nav" class="category-nav-container">
+            <!-- Se generará con JS -->
+        </div>
+
+        <!-- CONTENIDO DEL MENÚ -->
+        <main id="menu-container">
+            <!-- Las categorías y productos se generarán aquí -->
+        </main>
+
+        <!-- FOOTER CON REDES Y UBICACIONES (ACTUALIZADO) -->
+        <footer class="site-footer">
+            <div class="footer-section">
+                <h4>Síguenos en Redes</h4>
+                <div class="social-icons">
+                    <!-- Facebook con tu enlace -->
+                    <a href="https://www.facebook.com/share/1DLwyxoiy6/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
+                    </a>
+                    <!-- Instagram con tu enlace -->
+                    <a href="https://www.instagram.com/elsecretodelsaborc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
+                    </a>
+                    <!-- TikTok con tu enlace (NUEVO) -->
+                    <a href="https://www.tiktok.com/@elsecretodelsaborc?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.95-6.69-2.81-1.75-1.76-2.61-4.2-2.61-6.67 0-2.52 1.01-4.96 2.64-6.72 1.82-1.95 4.4-2.96 6.95-2.88.01 1.52-.02 3.04.01 4.56.51-.31 1.04-.56 1.58-.74.02-1.56.02-3.12 0-4.68z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Nuestros Locales</h4>
+                <div class="location-links">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Los+Incas+752,+Comas+15316" target="_blank">📍 Av. Los Incas</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Los+Pinos+1309,+Comas+15316" target="_blank">📍 Av. Los Pinos</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- BARRA INFERIOR FIJA -->
+        <nav>
+            <button id="order-button" onclick="showLocalModal()">Pedir por WhatsApp</button>
+        </nav>
+        
+        <!-- BOTÓN DE CARRITO FLOTANTE (Solo en Modo Pedido) -->
+        <button id="floating-cart-btn" class="floating-cart" onclick="showCartModal()">
+            🛒
+            <span id="cart-count">0</span>
+        </button>
+    </div>
+
+    <!-- VENTANA MODAL PARA SELECCIONAR LOCAL -->
+    <div id="local-modal" class="modal">
+        <div class="modal-content">
+            <h2>¿Para qué local es tu pedido?</h2>
+            <button onclick="selectLocalForOrder('incas')">📍 Local Av. Los Incas</button>
+            <button onclick="selectLocalForOrder('pinos')">📍 Local Av. Los Pinos</button>
+            <button class="cancel-button" onclick="closeModal('local-modal')">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- VENTANA MODAL PARA EL CARRITO DE COMPRAS -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <h2>Tu Pedido</h2>
+            <div id="cart-items-list">
+                <!-- Los items del carrito se insertarán aquí -->
+            </div>
+            
+            <div class="cart-total-display">
+                <span>Total:</span>
+                <span id="cart-total-price">S/ 0.00</span>
+            </div>
+            
+            <select id="delivery-options">
+                <option value="recojo">Recoger en Local</option>
+                <option value="delivery">Delivery</option>
+            </select>
+            
+            <div id="delivery-info" class="delivery-info-message">
+                <p>¡Perfecto! Para coordinar el envío, te pediremos que compartas tu <b>ubicación actual</b> en el chat de WhatsApp. El costo del delivery se calculará según la distancia.</p>
+            </div>
+
+            <div class="cart-buttons">
+                 <button class="confirm-button" onclick="sendOrderToWhatsApp()">Confirmar y Enviar</button>
+                 <button class="cancel-button" onclick="closeModal('cart-modal')">Seguir Pidiendo</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const AppData = {
+            locales: {
+                incas: {
+                    name: "Local Av. Los Incas",
+                    whatsapp: "51987654321", // Reemplazar
+                    promociones: ["duo-perfecto", "duo-verano"]
+                },
+                pinos: {
+                    name: "Local Av. Los Pinos",
+                    whatsapp: "51912345678", // Reemplazar
+                    // LÓGICA DE PROMOCIONES CORREGIDA
+                    promociones: ["duo-perfecto", "duo-verano", "combo-familiar-1", "combo-familiar-2", "combo-para-dos"]
+                }
+            },
+            menu: [
+                {
+                    category: "Promociones",
+                    id: "promociones",
+                    banner: "images/promociones.png",
+                    items: [
+                        { id: "duo-perfecto", name: "Dúo Perfecto", price: 18.00, desc: "2 panes c/chicharrón + 1 café o vaso de chicha.", promoLocal: "incas" },
+                        { id: "duo-verano", name: "Dúo de Verano", price: 24.00, desc: "2 panes c/chicharrón + 1 jugo de 250ml.", promoLocal: "incas" },
+                        { id: "combo-familiar-1", name: "Combo Familiar 1", price: 55.00, desc: "1/2 Kg chicharrón + 1 tamal + 4 cafés + 3 panes.", promoLocal: "pinos" },
+                        { id: "combo-familiar-2", name: "Combo Familiar 2", price: 98.00, desc: "1 Kg chicharrón + 2 tamales + 4 cafés + 3 panes.", promoLocal: "pinos" },
+                        { id: "combo-para-dos", name: "Combo para Dos", price: 28.00, desc: "1/4 Kg chicharrón + 1Lt chicha morada + 2 panes.", promoLocal: "pinos" }
+                    ]
+                },
+                {
+                    category: "Sándwich",
+                    id: "sandwich",
+                    banner: "images/sandwich.png", 
+                    items: [
+                        { id: "sand1", name: "Pan con Chicharrón", price: 10.00, desc: "Clásico, crujiente y con sarza criolla." },
+                        { id: "sand2", name: "Pan con Relleno", price: 6.00, desc: "El sabor tradicional en pan francés." },
+                        { id: "sand3", name: "Pan con Tamal", price: 5.00, desc: "Un clásico desayuno peruano." },
+                        { id: "sand4", name: "Pan con Camote", price: 3.00, desc: "Simple y delicioso." }
+                    ]
+                },
+                {
+                    category: "Chicharrón",
+                    id: "chicharron",
+                    banner: "images/chicharrones.png",
+                    items: [
+                        { id: "chich1", name: "1/4 KG Chicharrón", price: 20.00, desc: "Incluye camote, cancha y sarza criolla." },
+                        { id: "chich2", name: "1/2 KG Chicharrón", price: 40.00, desc: "Incluye camote, cancha y sarza criolla." },
+                        { id: "chich3", name: "3/4 KG Chicharrón", price: 60.00, desc: "Incluye camote, cancha y sarza criolla." },
+                        { id: "chich4", name: "1 KG Chicharrón", price: 80.00, desc: "Incluye camote, cancha y sarza criolla." }
+                    ]
+                },
+                {
+                    category: "Relleno y Tamal",
+                    id: "relleno",
+                    banner: "images/relleno2.png",
+                    items: [
+                        { id: "rell1", name: "1/4 KG Relleno", price: 13.00, desc: "Con camote." },
+                        { id: "rell2", name: "1/2 KG Relleno", price: 25.00, desc: "Con camote." },
+                        { id: "rell3", name: "1 KG Relleno", price: 48.00, desc: "Con camote." },
+                        { id: "tama1", name: "Tamales Criollos", price: 4.00, desc: "Elige entre chancho o pollo." }
+                    ]
+                },
+                {
+                    category: "Jugos y Batidos",
+                    id: "jugos",
+                    // TU AJUSTE DE IMAGEN
+                    banner: "images/jugosybatidos.png",
+                    items: [
+                        { id: "jugo1", name: "Jugo de Papaya", price: 7.00, desc: "Fresco y natural." },
+                        { id: "jugo2", name: "Jugo de Piña", price: 7.00, desc: "Refrescante y tropical." },
+                        { id: "jugo3", name: "Jugo de Fresa", price: 7.00, desc: "Dulce y lleno de sabor." },
+                        { id: "jugo4", name: "Jugo de Mango", price: 7.00, desc: "El preferido de la estación." },
+                        { id: "surt1", name: "Surtido Papaya c/ Piña", price: 8.00, desc: "Combinación refrescante." },
+                        { id: "surt2", name: "Surtido Papaya c/ Plátano", price: 8.00, desc: "Energía y sabor." },
+                        { id: "bat1", name: "Papaya c/ Leche", price: 10.00, desc: "Cremoso y nutritivo." },
+                        { id: "bat2", name: "Fresa c/ Leche", price: 10.00, desc: "Un clásico delicioso." },
+                    ]
+                },
+                {
+                    category: "Bebidas",
+                    id: "bebidas",
+                    banner: "images/bebidas.png",
+                    items: [
+                        { id: "beb1", name: "Café Pasado", price: 3.00, desc: "Taza normal." },
+                        { id: "beb2", name: "Café c/ Leche", price: 5.00, desc: "Taza normal." },
+                        { id: "beb3", name: "Vaso de Chicha", price: 3.00, desc: "Nuestra chicha morada casera." },
+                        { id: "beb4", name: "1LT. Chicha Morada", price: 5.00, desc: "Para compartir." },
+                        { id: "beb5", name: "Coca Cola / Inca Kola (600ml)", price: 5.00, desc: "Personal." },
+                    ]
+                },
+                {
+                    category: "Extras",
+                    id: "extras",
+                    banner: "images/extras.png",
+                    items: [
+                        { id: "ext1", name: "Esencia de Café", price: 6.00, desc: "" },
+                        { id: "ext2", name: "Pan Pequeño (2 und.)", price: 1.00, desc: "" },
+                        { id: "ext3", name: "Porción de Cebolla", price: 3.00, desc: "" },
+                        { id: "ext4", name: "Porción de Cancha", price: 3.00, desc: "" },
+                        { id: "ext5", name: "Porción de Camote", price: 5.00, desc: "" },
+                    ]
+                }
+            ]
+        };
+        
+        let state = {
+            selectedLocal: null,
+            cart: {},
+            isOrderMode: false
+        };
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu('view');
+            renderCategoryNav();
+            
+            document.getElementById('enter-menu-btn').addEventListener('click', () => {
+                document.getElementById('splash-screen').classList.add('hidden');
+            });
+            
+            document.getElementById('delivery-options').addEventListener('change', (e) => {
+                document.getElementById('delivery-info').style.display = e.target.value === 'delivery' ? 'block' : 'none';
+            });
+        });
+        
+        function renderCategoryNav() {
+            const navContainer = document.getElementById('category-nav');
+            navContainer.innerHTML = '';
+            AppData.menu.forEach(category => {
+                navContainer.innerHTML += `<a href="#${category.id}" class="category-nav-btn">${category.category}</a>`;
+            });
+        }
+        
+        function renderMenu(mode = 'view', localFilter = null) {
+            const menuContainer = document.getElementById('menu-container');
+            menuContainer.innerHTML = '';
+
+            AppData.menu.forEach(cat => {
+                const categorySection = document.createElement('div');
+                categorySection.className = 'category';
+                categorySection.id = cat.id;
+                
+                let filteredItems = cat.items;
+                if (mode === 'order' && cat.id === 'promociones') {
+                    const validPromos = AppData.locales[localFilter].promociones;
+                    filteredItems = cat.items.filter(item => validPromos.includes(item.id));
+                }
+                
+                if (filteredItems.length === 0) return;
+                
+                let bannerHtml = cat.banner ? `<img src="${cat.banner}" class="category-banner" alt="${cat.category}">` : '';
+                categorySection.innerHTML = `<h2 class="category-title">${cat.category}</h2>${bannerHtml}`;
+
+                filteredItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'menu-item-text';
+                    itemElement.dataset.id = item.id;
+                    
+                    let promoBadge = '';
+                    if (mode === 'view' && item.promoLocal) {
+                        const localName = AppData.locales[item.promoLocal].name;
+                        promoBadge = `<span class="promo-badge promo-badge-${item.promoLocal}">${localName}</span>`;
+                    }
+
+                    itemElement.innerHTML = `
+                        <div class="item-info">
+                            <h3>${item.name} ${promoBadge}</h3>
+                            <p>${item.desc}</p>
+                        </div>
+                        <div class="item-price-view">S/ ${item.price.toFixed(2)}</div>
+                        <div class="item-actions-order">
+                            <button class="quantity-btn decrease-btn" onclick="handleCartChange('${item.id}', 'decrease')">-</button>
+                            <span class="quantity">0</span>
+                            <button class="quantity-btn increase-btn" onclick="handleCartChange('${item.id}', 'increase')">+</button>
+                        </div>
+                    `;
+                    categorySection.appendChild(itemElement);
+                });
+                menuContainer.appendChild(categorySection);
+            });
+        }
+        
+        function showLocalModal() {
+            if (state.isOrderMode) {
+                showCartModal();
+            } else {
+                document.getElementById('local-modal').style.display = 'flex';
+            }
+        }
+        
+        function showCartModal() {
+            updateCartModal();
+            document.getElementById('cart-modal').style.display = 'flex';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function selectLocalForOrder(local) {
+            state.selectedLocal = local;
+            state.isOrderMode = true;
+            document.body.classList.add('order-mode'); 
+            
+            renderMenu('order', local);
+            updateAllQuantities();
+            
+            document.getElementById('local-name-display').textContent = `Pedido para: ${AppData.locales[local].name}`;
+            document.getElementById('order-button').textContent = 'Ver Mi Pedido';
+            document.getElementById('floating-cart-btn').style.display = 'flex';
+            
+            closeModal('local-modal');
+        }
+        
+        function exitOrderMode() {
+            state.isOrderMode = false;
+            state.selectedLocal = null;
+            state.cart = {};
+            document.body.classList.remove('order-mode');
+            
+            renderMenu('view');
+            updateCartCount();
+            
+            document.getElementById('order-button').textContent = 'Pedir por WhatsApp';
+            document.getElementById('floating-cart-btn').style.display = 'none';
+        }
+        
+        function handleCartChange(itemId, action) {
+            let quantity = state.cart[itemId] || 0;
+            if (action === 'increase') {
+                quantity++;
+            } else if (action === 'decrease') {
+                quantity = Math.max(0, quantity - 1);
+            }
+            
+            if (quantity === 0) {
+                delete state.cart[itemId];
+            } else {
+                state.cart[itemId] = quantity;
+            }
+            
+            updateQuantityDisplay(itemId);
+            updateCartCount();
+        }
+        
+        function updateQuantityDisplay(itemId) {
+            const itemElement = document.querySelector(`.menu-item-text[data-id="${itemId}"]`);
+            if (itemElement) {
+                itemElement.querySelector('.quantity').textContent = state.cart[itemId] || 0;
+            }
+        }
+        
+        function updateAllQuantities() {
+            document.querySelectorAll('.menu-item-text').forEach(itemEl => {
+                const id = itemEl.dataset.id;
+                itemEl.querySelector('.quantity').textContent = state.cart[id] || 0;
+            });
+        }
+        
+        function updateCartCount() {
+            const totalCount = Object.values(state.cart).reduce((sum, qty) => sum + qty, 0);
+            document.getElementById('cart-count').textContent = totalCount;
+        }
+        
+        function updateCartModal() {
+            const cartItemsList = document.getElementById('cart-items-list');
+            const cartTotalDisplay = document.getElementById('cart-total-price');
+            let total = 0;
+            cartItemsList.innerHTML = '';
+
+            if (Object.keys(state.cart).length === 0) {
+                cartItemsList.innerHTML = '<p class="cart-empty-msg">Tu carrito está vacío.</p>';
+            } else {
+                for (const id in state.cart) {
+                    const item = AppData.menu.flatMap(cat => cat.items).find(i => i.id === id);
+                    const quantity = state.cart[id];
+                    const itemTotal = quantity * item.price;
+                    total += itemTotal;
+
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item-summary';
+                    itemElement.innerHTML = `
+                        <div class="item-info">
+                            <span class="item-quantity">${quantity}x</span>
+                            <span class="item-name">${item.name}</span>
+                        </div>
+                        <span class="item-total-price">S/ ${itemTotal.toFixed(2)}</span>
+                    `;
+                    cartItemsList.appendChild(itemElement);
+                }
+            }
+            cartTotalDisplay.textContent = `S/ ${total.toFixed(2)}`;
+        }
+        
+        function sendOrderToWhatsApp() {
+            if (Object.keys(state.cart).length === 0) {
+                alert("Tu carrito está vacío. Agrega productos para continuar.");
+                return;
+            }
+            
+            let message = `¡Hola *El Secreto del Sabor (${AppData.locales[state.selectedLocal].name})*! 👋\n\nQuisiera hacer el siguiente pedido:\n\n`;
+            let total = 0;
+
+            for (const id in state.cart) {
+                const item = AppData.menu.flatMap(cat => cat.items).find(i => i.id === id);
+                message += `*${state.cart[id]}x* ${item.name}\n`;
+                total += item.price * state.cart[id];
+            }
+            
+            const deliveryType = document.getElementById('delivery-options').value;
+            message += `\n*Total: S/ ${total.toFixed(2)}*\n`;
+            message += `\n*Tipo de Entrega:* ${deliveryType === 'recojo' ? 'Recoger en Local' : 'Delivery'}\n`;
+            if(deliveryType === 'delivery') {
+                message += `\n_(Espero la coordinación para compartir mi ubicación y conocer el costo del envío)._\n`;
+            }
+            
+            message += '\n¡Espero su confirmación, gracias!';
+            
+            const whatsappNumber = AppData.locales[state.selectedLocal].whatsapp;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+
+    </script>
+</body>
+</html>
+
