@@ -388,7 +388,8 @@
         function selectLocalForOrder(local) {
             state.selectedLocal = local;
             state.isOrderMode = true;
-            document.body.classList.add('order-mode'); 
+            document.body.classList.add('order-mode');
+            window.scrollTo(0, 0); 
             
             renderMenu('order', local);
             updateAllQuantities();
