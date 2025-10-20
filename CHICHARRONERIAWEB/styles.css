@@ -152,12 +152,19 @@ body.order-mode #order-info { text-align: left; }
     display: flex;
     overflow-x: auto;
     position: sticky;
-    /* CORRECCIÓN DEL BUG VISUAL */
-    top: 85px; 
+    /* AJUSTE FINAL DE PRECISIÓN: Dando más espacio */
+    top: 88px; 
     z-index: 9;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    transition: top 0.2s ease-in-out; /* Añade una transición suave */
 }
+
+/* El valor para el modo pedido se mantiene igual */
+body.order-mode .category-nav-container {
+    top: 49px; 
+}
+
 .category-nav-container::-webkit-scrollbar { display: none; }
 .category-nav-btn {
     background-color: #2c0b0e;
@@ -525,4 +532,3 @@ nav {
     background-color: #facc15;
     color: #2c0b0e;
 }
-
