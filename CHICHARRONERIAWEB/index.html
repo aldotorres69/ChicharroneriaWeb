@@ -31,10 +31,9 @@
                 <div id="order-info">
                      <p id="local-name-display"></p>
                 </div>
+                 <button id="cancel-order-btn" class="cancel-order-button" onclick="exitOrderMode()">Cancelar Pedido</button>
             </div>
-            <!-- INDICADOR DE HORARIO (NUEVO) -->
             <div id="store-status"></div>
-            <button id="cancel-order-btn" class="cancel-order-button" onclick="exitOrderMode()">Cancelar Pedido</button>
         </header>
 
         <!-- NAVEGACIÓN DE CATEGORÍAS FIJA -->
@@ -144,8 +143,10 @@
                     id: "promociones",
                     banner: "images/promociones.png",
                     items: [
-                        { id: "duo-perfecto", name: "Dúo Perfecto", price: 18.00, desc: "2 panes c/chicharrón + 1 café o vaso de chicha.", promoLocal: "incas" },
-                        { id: "duo-verano", name: "Dúo de Verano", price: 24.00, desc: "2 panes c/chicharrón + 1 jugo de 250ml.", promoLocal: "incas" },
+                        // CAMBIO: Se eliminó "promoLocal" para que aparezcan en ambos locales sin etiqueta
+                        { id: "duo-perfecto", name: "Dúo Perfecto", price: 18.00, desc: "2 panes c/chicharrón + 1 café o vaso de chicha." },
+                        { id: "duo-verano", name: "Dúo de Verano", price: 24.00, desc: "2 panes c/chicharrón + 1 jugo de 250ml." },
+                        // Estas promociones mantienen su etiqueta porque solo son para Los Pinos
                         { id: "combo-familiar-1", name: "Combo Familiar 1", price: 55.00, desc: "1/2 Kg chicharrón + 1 tamal + 4 cafés + 3 panes.", promoLocal: "pinos" },
                         { id: "combo-familiar-2", name: "Combo Familiar 2", price: 98.00, desc: "1 Kg chicharrón + 2 tamales + 4 cafés + 3 panes.", promoLocal: "pinos" },
                         { id: "combo-para-dos", name: "Combo para Dos", price: 28.00, desc: "1/4 Kg chicharrón + 1Lt chicha morada + 2 panes.", promoLocal: "pinos" }
@@ -156,10 +157,10 @@
                     id: "sandwich",
                     banner: "images/sandwich.png", 
                     items: [
-                        { id: "sand1", name: "Pan con Chicharrón", price: 10.00, desc: "Clásico, crujiente y con sarza criolla." },
-                        { id: "sand2", name: "Pan con Relleno", price: 6.00, desc: "El sabor tradicional en pan francés." },
-                        { id: "sand3", name: "Pan con Tamal", price: 5.00, desc: "Un clásico desayuno peruano." },
-                        { id: "sand4", name: "Pan con Camote", price: 3.00, desc: "Simple y delicioso." }
+                        { id: "sand1", name: "Pan con Chicharrón", price: 10.00, desc: "" },
+                        { id: "sand2", name: "Pan con Relleno", price: 6.00, desc: "" },
+                        { id: "sand3", name: "Pan con Tamal", price: 5.00, desc: "" },
+                        { id: "sand4", name: "Pan con Camote", price: 3.00, desc: "" }
                     ]
                 },
                 {
@@ -167,10 +168,10 @@
                     id: "chicharron",
                     banner: "images/chicharrones.png",
                     items: [
-                        { id: "chich1", name: "1/4 KG Chicharrón", price: 20.00, desc: "Incluye camote, cancha y sarza criolla." },
-                        { id: "chich2", name: "1/2 KG Chicharrón", price: 40.00, desc: "Incluye camote, cancha y sarza criolla." },
-                        { id: "chich3", name: "3/4 KG Chicharrón", price: 60.00, desc: "Incluye camote, cancha y sarza criolla." },
-                        { id: "chich4", name: "1 KG Chicharrón", price: 80.00, desc: "Incluye camote, cancha y sarza criolla." }
+                        { id: "chich1", name: "1/4 KG Chicharrón", price: 20.00, desc: "Camote, Cancha y Salsa Criolla" },
+                        { id: "chich2", name: "1/2 KG Chicharrón", price: 40.00, desc: "Camote, Cancha y Salsa Criolla" },
+                        { id: "chich3", name: "3/4 KG Chicharrón", price: 60.00, desc: "Camote, Cancha y Salsa Criolla" },
+                        { id: "chich4", name: "1 KG Chicharrón", price: 80.00, desc: "Camote, Cancha y Salsa Criolla" }
                     ]
                 },
                 {
@@ -178,49 +179,94 @@
                     id: "relleno",
                     banner: "images/relleno2.png",
                     items: [
-                        { id: "rell1", name: "1/4 KG Relleno", price: 13.00, desc: "Con camote." },
-                        { id: "rell2", name: "1/2 KG Relleno", price: 25.00, desc: "Con camote." },
-                        { id: "rell3", name: "1 KG Relleno", price: 48.00, desc: "Con camote." },
-                        { id: "tama1", name: "Tamales Criollos", price: 4.00, desc: "Elige entre chancho o pollo." }
+                        { id: "rell1", name: "1/4 KG Relleno", price: 13.00, desc: "Con camote" },
+                        { id: "rell2", name: "1/2 KG Relleno", price: 25.00, desc: "Con camote" },
+                        { id: "rell3", name: "1 KG Relleno", price: 48.00, desc: "Con camote" },
+                        { id: "tama1", name: "Tamales Criollos", price: 4.00, desc: "Chancho / Pollo" }
                     ]
                 },
                 {
-                    category: "Jugos y Batidos",
+                    category: "Bebidas Calientes",
+                    id: "bebidas-calientes",
+                    banner: "images/bebidas.png",
+                    items: [
+                        { id: "bcal1", name: "Café Pasado (Taza Normal)", price: 3.00, desc: "" },
+                        { id: "bcal2", name: "Café Pasado (Taza Grande)", price: 5.00, desc: "" },
+                        { id: "bcal3", name: "Café c/ Leche (Taza Normal)", price: 5.00, desc: "" },
+                        { id: "bcal4", name: "Café c/ Leche (Taza Grande)", price: 9.00, desc: "" },
+                        { id: "bcal5", name: "Milo c/ Leche", price: 5.00, desc: "" },
+                        { id: "bcal6", name: "Leche Sola", price: 5.00, desc: "" },
+                        { id: "bcal7", name: "Té, Anís o Manzanilla", price: 2.00, desc: "" }
+                    ]
+                },
+                 {
+                    category: "Bebidas Frías",
+                    id: "bebidas-frias",
+                    banner: "images/chicha-morada.png",
+                    items: [
+                        { id: "bfria1", name: "Vaso de Chicha", price: 3.00, desc: "" },
+                        { id: "bfria2", name: "1/2 LT Chicha Morada", price: 5.00, desc: "" },
+                        { id: "bfria3", name: "1 LT Chicha Morada", price: 10.00, desc: "" },
+                        { id: "bfria4", name: "Coca Cola/Inca Kola (600ml)", price: 5.00, desc: "" },
+                        { id: "bfria5", name: "Coca Cola/Inca Kola (1LT)", price: 8.00, desc: "" }, 
+                        { id: "bfria6", name: "Agua San Luis", price: 2.50, desc: "" }
+                    ]
+                },
+                {
+                    category: "Jugos",
                     id: "jugos",
                     banner: "images/jugosybatidos.png",
                     items: [
-                        { id: "jugo1", name: "Jugo de Papaya", price: 7.00, desc: "Fresco y natural." },
-                        { id: "jugo2", name: "Jugo de Piña", price: 7.00, desc: "Refrescante y tropical." },
-                        { id: "jugo3", name: "Jugo de Fresa", price: 7.00, desc: "Dulce y lleno de sabor." },
-                        { id: "jugo4", name: "Jugo de Mango", price: 7.00, desc: "El preferido de la estación." },
-                        { id: "surt1", name: "Surtido Papaya c/ Piña", price: 8.00, desc: "Combinación refrescante." },
-                        { id: "surt2", name: "Surtido Papaya c/ Plátano", price: 8.00, desc: "Energía y sabor." },
-                        { id: "bat1", name: "Papaya c/ Leche", price: 10.00, desc: "Cremoso y nutritivo." },
-                        { id: "bat2", name: "Fresa c/ Leche", price: 10.00, desc: "Un clásico delicioso." },
+                        { id: "jugo1", name: "Jugo de Papaya", price: 7.00, desc: "" },
+                        { id: "jugo2", name: "Jugo de Piña", price: 7.00, desc: "" },
+                        { id: "jugo3", name: "Jugo de Fresa", price: 7.00, desc: "" },
+                        { id: "jugo4", name: "Jugo de Mango", price: 7.00, desc: "" }
                     ]
                 },
                 {
-                    category: "Bebidas",
-                    id: "bebidas",
-                    banner: "images/bebidas.png",
+                    category: "Surtidos",
+                    id: "surtidos",
+                    banner: "images/jugosybatidos.png",
                     items: [
-                        { id: "beb1", name: "Café Pasado", price: 3.00, desc: "Taza normal." },
-                        { id: "beb2", name: "Café c/ Leche", price: 5.00, desc: "Taza normal." },
-                        { id: "beb3", name: "Vaso de Chicha", price: 3.00, desc: "Nuestra chicha morada casera." },
-                        { id: "beb4", name: "1LT. Chicha Morada", price: 5.00, desc: "Para compartir." },
-                        { id: "beb5", name: "Coca Cola / Inca Kola (600ml)", price: 5.00, desc: "Personal." },
+                        { id: "surt1", name: "Surtido Papaya c/ Piña", price: 8.00, desc: "" },
+                        { id: "surt2", name: "Surtido Papaya c/ Plátano", price: 8.00, desc: "" },
+                        { id: "surt3", name: "Surtido Papaya c/ Fresa", price: 8.00, desc: "" },
+                        { id: "surt4", name: "Surtido Piña c/ Fresa", price: 8.00, desc: "" },
+                        { id: "surt5", name: "Surtido Mango c/ Piña", price: 8.00, desc: "" },
+                        { id: "surt6", name: "Surtido Papaya, Piña y Fresa", price: 8.00, desc: "" }
+                    ]
+                },
+                {
+                    category: "Batidos",
+                    id: "batidos",
+                    banner: "images/jugosybatidos.png",
+                    items: [
+                        { id: "bat1", name: "Papaya c/ Leche", price: 10.00, desc: "" },
+                        { id: "bat2", name: "Fresa c/ Leche", price: 10.00, desc: "" },
+                        { id: "bat3", name: "Mango c/ Leche", price: 10.00, desc: "" },
+                        { id: "bat4", name: "Plátano c/ Leche", price: 10.00, desc: "" },
+                        { id: "bat5", name: "Especial", price: 10.00, desc: "" },
+                        { id: "bat6", name: "Fresa / Arándano", price: 10.00, desc: "" }
                     ]
                 },
                 {
                     category: "Extras",
                     id: "extras",
-                    banner: "images/extras.png",
+                    banner: "images/cafepasado.png",
                     items: [
                         { id: "ext1", name: "Esencia de Café", price: 6.00, desc: "" },
                         { id: "ext2", name: "Pan Pequeño (2 und.)", price: 1.00, desc: "" },
-                        { id: "ext3", name: "Porción de Cebolla", price: 3.00, desc: "" },
-                        { id: "ext4", name: "Porción de Cancha", price: 3.00, desc: "" },
-                        { id: "ext5", name: "Porción de Camote", price: 5.00, desc: "" },
+                        { id: "ext3", name: "Pan Grande (2 und.)", price: 1.00, desc: "" }
+                    ]
+                },
+                {
+                    category: "Guarniciones",
+                    id: "guarniciones",
+                    banner: "images/extras.png",
+                    items: [
+                        { id: "guar1", name: "Porción de Cebolla", price: 3.00, desc: "" },
+                        { id: "guar2", name: "Porción de Cancha", price: 3.00, desc: "" },
+                        { id: "guar3", name: "Porción de Camote", price: 5.00, desc: "" }
                     ]
                 }
             ]
@@ -235,7 +281,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderMenu('view');
             renderCategoryNav();
-            updateStoreStatus(); // Llama a la función del horario
+            updateStoreStatus();
             
             document.getElementById('enter-menu-btn').addEventListener('click', () => {
                 document.getElementById('splash-screen').classList.add('hidden');
@@ -246,7 +292,6 @@
             });
         });
         
-        // LÓGICA PARA EL INDICADOR DE HORARIO (NUEVO)
         function updateStoreStatus() {
             const statusElement = document.getElementById('store-status');
             const now = new Date();
@@ -257,9 +302,11 @@
             if (currentHour >= openHour && currentHour < closeHour) {
                 statusElement.textContent = 'Abierto';
                 statusElement.classList.add('status-open');
+                statusElement.classList.remove('status-closed');
             } else {
                 statusElement.textContent = 'Cerrado';
                 statusElement.classList.add('status-closed');
+                statusElement.classList.remove('status-open');
             }
         }
         
@@ -352,7 +399,6 @@
             closeModal('local-modal');
         }
         
-        // FUNCIÓN CORREGIDA
         function exitOrderMode() {
             state.isOrderMode = false;
             state.selectedLocal = null;
@@ -364,7 +410,7 @@
             
             document.getElementById('order-button').textContent = 'Pedir por WhatsApp';
             document.getElementById('floating-cart-btn').style.display = 'none';
-            document.getElementById('local-name-display').textContent = ''; // Limpia el texto
+            document.getElementById('local-name-display').textContent = '';
         }
         
         function handleCartChange(itemId, action) {
