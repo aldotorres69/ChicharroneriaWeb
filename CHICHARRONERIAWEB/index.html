@@ -12,21 +12,19 @@
 </head>
 <body>
 
-    <!-- PANTALLA DE BIENVENIDA (ACTUALIZADA) -->
+    <!-- PANTALLA DE BIENVENIDA -->
     <div id="splash-screen" class="splash">
         <div class="splash-logo-container">
-            <!-- NUEVO LOGO PRINCIPAL -->
             <img src="images/logo-principal.png" alt="El Secreto del Sabor" class="splash-main-logo">
         </div>
         <button id="enter-menu-btn">Ver Menú</button>
     </div>
 
     <div class="container">
-        <!-- CABECERA FIJA (CON TU AJUSTE DE LOGO) -->
+        <!-- CABECERA FIJA -->
         <header>
             <div class="header-content-wrapper">
                 <div class="logo">
-                    <!-- LOGO AÑADIDO POR TI -->
                     <img src="images/logo-cerdito.png" alt="Logo" class="header-logo">
                     <span>El Secreto<br>del Sabor</span>
                 </div>
@@ -34,6 +32,8 @@
                      <p id="local-name-display"></p>
                 </div>
             </div>
+            <!-- INDICADOR DE HORARIO (NUEVO) -->
+            <div id="store-status"></div>
             <button id="cancel-order-btn" class="cancel-order-button" onclick="exitOrderMode()">Cancelar Pedido</button>
         </header>
 
@@ -47,20 +47,17 @@
             <!-- Las categorías y productos se generarán aquí -->
         </main>
 
-        <!-- FOOTER CON REDES Y UBICACIONES (ACTUALIZADO) -->
+        <!-- FOOTER CON REDES Y UBICACIONES -->
         <footer class="site-footer">
             <div class="footer-section">
                 <h4>Síguenos en Redes</h4>
                 <div class="social-icons">
-                    <!-- Facebook con tu enlace -->
                     <a href="https://www.facebook.com/share/1DLwyxoiy6/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
                     </a>
-                    <!-- Instagram con tu enlace -->
                     <a href="https://www.instagram.com/elsecretodelsaborc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
                     </a>
-                    <!-- TikTok con tu enlace (NUEVO) -->
                     <a href="https://www.tiktok.com/@elsecretodelsaborc?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.95-6.69-2.81-1.75-1.76-2.61-4.2-2.61-6.67 0-2.52 1.01-4.96 2.64-6.72 1.82-1.95 4.4-2.96 6.95-2.88.01 1.52-.02 3.04.01 4.56.51-.31 1.04-.56 1.58-.74.02-1.56.02-3.12 0-4.68z"/></svg>
                     </a>
@@ -138,7 +135,6 @@
                 pinos: {
                     name: "Local Av. Los Pinos",
                     whatsapp: "51912345678", // Reemplazar
-                    // LÓGICA DE PROMOCIONES CORREGIDA
                     promociones: ["duo-perfecto", "duo-verano", "combo-familiar-1", "combo-familiar-2", "combo-para-dos"]
                 }
             },
@@ -191,7 +187,6 @@
                 {
                     category: "Jugos y Batidos",
                     id: "jugos",
-                    // TU AJUSTE DE IMAGEN
                     banner: "images/jugosybatidos.png",
                     items: [
                         { id: "jugo1", name: "Jugo de Papaya", price: 7.00, desc: "Fresco y natural." },
@@ -240,6 +235,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderMenu('view');
             renderCategoryNav();
+            updateStoreStatus(); // Llama a la función del horario
             
             document.getElementById('enter-menu-btn').addEventListener('click', () => {
                 document.getElementById('splash-screen').classList.add('hidden');
@@ -249,6 +245,23 @@
                 document.getElementById('delivery-info').style.display = e.target.value === 'delivery' ? 'block' : 'none';
             });
         });
+        
+        // LÓGICA PARA EL INDICADOR DE HORARIO (NUEVO)
+        function updateStoreStatus() {
+            const statusElement = document.getElementById('store-status');
+            const now = new Date();
+            const currentHour = now.getHours();
+            const openHour = 7;
+            const closeHour = 12;
+
+            if (currentHour >= openHour && currentHour < closeHour) {
+                statusElement.textContent = 'Abierto';
+                statusElement.classList.add('status-open');
+            } else {
+                statusElement.textContent = 'Cerrado';
+                statusElement.classList.add('status-closed');
+            }
+        }
         
         function renderCategoryNav() {
             const navContainer = document.getElementById('category-nav');
@@ -339,6 +352,7 @@
             closeModal('local-modal');
         }
         
+        // FUNCIÓN CORREGIDA
         function exitOrderMode() {
             state.isOrderMode = false;
             state.selectedLocal = null;
@@ -350,6 +364,7 @@
             
             document.getElementById('order-button').textContent = 'Pedir por WhatsApp';
             document.getElementById('floating-cart-btn').style.display = 'none';
+            document.getElementById('local-name-display').textContent = ''; // Limpia el texto
         }
         
         function handleCartChange(itemId, action) {
