@@ -152,7 +152,8 @@ body.order-mode #order-info { text-align: left; }
     display: flex;
     overflow-x: auto;
     position: sticky;
-    top: 77px;
+    /* CORRECCIÓN DEL BUG VISUAL */
+    top: 85px; 
     z-index: 9;
     -ms-overflow-style: none;
     scrollbar-width: none;
