@@ -96,28 +96,74 @@
     <!-- VENTANA MODAL PARA EL CARRITO DE COMPRAS -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
-            <h2>Tu Pedido</h2>
-            <div id="cart-items-list">
-                <!-- Los items del carrito se insertarán aquí -->
-            </div>
-            
-            <div class="cart-total-display">
-                <span>Total:</span>
-                <span id="cart-total-price">S/ 0.00</span>
-            </div>
-            
-            <select id="delivery-options">
-                <option value="recojo">Recoger en Local</option>
-                <option value="delivery">Delivery</option>
-            </select>
-            
-            <div id="delivery-info" class="delivery-info-message">
-                <p>¡Perfecto! Para coordinar el envío, te pediremos que compartas tu <b>ubicación actual</b> en el chat de WhatsApp. El costo del delivery se calculará según la distancia.</p>
+            <div id="cart-step-1" class="cart-step active-step">
+                <h2>Tu Pedido</h2>
+                <div id="cart-items-list">
+                    <!-- Los items del carrito se insertarán aquí -->
+                </div>
+                <div class="cart-total-display">
+                    <span>Total:</span>
+                    <span id="cart-total-price">S/ 0.00</span>
+                </div>
+                <div class="cart-buttons">
+                    <button class="confirm-button" onclick="goToCartStep(2)">Continuar</button>
+                    <button class="cancel-button" onclick="closeModal('cart-modal')">Seguir Pidiendo</button>
+                </div>
             </div>
 
-            <div class="cart-buttons">
-                 <button class="confirm-button" onclick="sendOrderToWhatsApp()">Confirmar y Enviar</button>
-                 <button class="cancel-button" onclick="closeModal('cart-modal')">Seguir Pidiendo</button>
+            <div id="cart-step-2" class="cart-step">
+                <h2>Tus Datos</h2>
+                <input type="text" id="customer-name" placeholder="Escribe tu nombre aquí..." class="customer-input">
+                
+                <select id="delivery-options">
+                    <option value="recojo">Recoger en Local</option>
+                    <option value="delivery">Delivery</option>
+                </select>
+                
+                <div id="delivery-info" class="delivery-info-message">
+                    <p>¡Perfecto! Para coordinar el envío, te pediremos que compartas tu <b>ubicación actual</b> en el chat de WhatsApp. El costo del delivery se calculará según la distancia.</p>
+                </div>
+
+                <div id="payment-method">
+                    <p>¿Cómo deseas pagar?</p>
+                    <div class="payment-options">
+                        <label><input type="radio" name="payment" value="Yape"> Yape</label>
+                        <label><input type="radio" name="payment" value="Plin"> Plin</label>
+                        <label><input type="radio" name="payment" value="Efectivo"> Efectivo</label>
+                        <label><input type="radio" name="payment" value="Tarjeta"> Tarjeta</label>
+                    </div>
+                </div>
+
+                <div class="cart-buttons">
+                    <button class="confirm-button" onclick="sendOrderToWhatsApp()">Confirmar y Enviar</button>
+                    <button class="cancel-button" onclick="goToCartStep(1)">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VENTANA MODAL PARA SELECCIONAR BEBIDA -->
+    <div id="drink-choice-modal" class="modal">
+        <div class="modal-content">
+            <h2>Elige tu bebida</h2>
+            <p>Para tu "Dúo Perfecto", ¿qué prefieres?</p>
+            <div class="drink-options">
+                <button onclick="selectDrink('Café')">Café</button>
+                <button onclick="selectDrink('Chicha')">Chicha</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VENTANA MODAL PARA SELECCIONAR JUGO -->
+    <div id="juice-choice-modal" class="modal">
+        <div class="modal-content">
+            <h2>Elige tu jugo</h2>
+            <p>Para tu "Dúo de Verano", ¿qué jugo prefieres?</p>
+            <div class="juice-options">
+                <button onclick="selectJuice('Jugo de Papaya')">Jugo de Papaya</button>
+                <button onclick="selectJuice('Jugo de Piña')">Jugo de Piña</button>
+                <button onclick="selectJuice('Jugo de Fresa')">Jugo de Fresa</button>
+                <button onclick="selectJuice('Jugo Surtido')">Jugo Surtido</button>
             </div>
         </div>
     </div>
@@ -144,8 +190,8 @@
                     banner: "images/promociones.png",
                     items: [
                         // CAMBIO: Se eliminó "promoLocal" para que aparezcan en ambos locales sin etiqueta
-                        { id: "duo-perfecto", name: "Dúo Perfecto", price: 18.00, desc: "2 panes c/chicharrón + 1 café o vaso de chicha." },
-                        { id: "duo-verano", name: "Dúo de Verano", price: 24.00, desc: "2 panes c/chicharrón + 1 jugo de 250ml." },
+                        { id: "duo-perfecto", name: "Dúo Perfecto", price: 18.00, desc: "2 panes c/chicharrón + 1 café o vaso de chicha.", needsChoice: true, choiceType: "drink" },
+                        { id: "duo-verano", name: "Dúo de Verano", price: 24.00, desc: "2 panes c/chicharrón + 1 jugo de 250ml.", needsChoice: true, choiceType: "juice" },
                         // Estas promociones mantienen su etiqueta porque solo son para Los Pinos
                         { id: "combo-para-dos", name: "Combo para Dos", price: 28.00, desc: "1/4 Kg chicharrón + 1Lt chicha morada + 2 panes.", promoLocal: "pinos" },
                         { id: "combo-familiar-1", name: "Combo Familiar 1", price: 55.00, desc: "1/2 Kg chicharrón + 1 tamal + 4 cafés + 3 panes.", promoLocal: "pinos" },
@@ -276,7 +322,9 @@
         let state = {
             selectedLocal: null,
             cart: {},
-            isOrderMode: false
+            isOrderMode: false,
+            cartStep: 1,
+            currentItemId: null
         };
         
         document.addEventListener('DOMContentLoaded', () => {
@@ -378,6 +426,7 @@
         
         function showCartModal() {
             updateCartModal();
+            goToCartStep(1); // Siempre mostrar el primer paso al abrir
             document.getElementById('cart-modal').style.display = 'flex';
         }
         
@@ -417,7 +466,20 @@
         }
         
         function handleCartChange(itemId, action) {
-            let quantity = state.cart[itemId] || 0;
+            const item = AppData.menu.flatMap(cat => cat.items).find(i => i.id === itemId);
+            
+            if (action === 'increase' && item.needsChoice) {
+                state.currentItemId = itemId;
+                if (item.choiceType === 'drink') {
+                    document.getElementById('drink-choice-modal').style.display = 'flex';
+                } else if (item.choiceType === 'juice') {
+                    document.getElementById('juice-choice-modal').style.display = 'flex';
+                }
+                return;
+            }
+
+            let quantity = state.cart[itemId] ? state.cart[itemId].quantity : 0;
+
             if (action === 'increase') {
                 quantity++;
             } else if (action === 'decrease') {
@@ -427,7 +489,7 @@
             if (quantity === 0) {
                 delete state.cart[itemId];
             } else {
-                state.cart[itemId] = quantity;
+                state.cart[itemId] = { ...state.cart[itemId], quantity: quantity };
             }
             
             updateQuantityDisplay(itemId);
@@ -437,19 +499,21 @@
         function updateQuantityDisplay(itemId) {
             const itemElement = document.querySelector(`.menu-item-text[data-id="${itemId}"]`);
             if (itemElement) {
-                itemElement.querySelector('.quantity').textContent = state.cart[itemId] || 0;
+                const quantity = state.cart[itemId] ? state.cart[itemId].quantity : 0;
+                itemElement.querySelector('.quantity').textContent = quantity;
             }
         }
         
         function updateAllQuantities() {
             document.querySelectorAll('.menu-item-text').forEach(itemEl => {
                 const id = itemEl.dataset.id;
-                itemEl.querySelector('.quantity').textContent = state.cart[id] || 0;
+                const quantity = state.cart[id] ? state.cart[id].quantity : 0;
+                itemEl.querySelector('.quantity').textContent = quantity;
             });
         }
         
         function updateCartCount() {
-            const totalCount = Object.values(state.cart).reduce((sum, qty) => sum + qty, 0);
+            const totalCount = Object.values(state.cart).reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById('cart-count').textContent = totalCount;
         }
         
@@ -463,17 +527,22 @@
                 cartItemsList.innerHTML = '<p class="cart-empty-msg">Tu carrito está vacío.</p>';
             } else {
                 for (const id in state.cart) {
+                    const cartItem = state.cart[id];
                     const item = AppData.menu.flatMap(cat => cat.items).find(i => i.id === id);
-                    const quantity = state.cart[id];
-                    const itemTotal = quantity * item.price;
+                    const itemTotal = cartItem.quantity * item.price;
                     total += itemTotal;
+
+                    let itemName = item.name;
+                    if (cartItem.choice) {
+                        itemName += ` (${cartItem.choice})`;
+                    }
 
                     const itemElement = document.createElement('div');
                     itemElement.className = 'cart-item-summary';
                     itemElement.innerHTML = `
                         <div class="item-info">
-                            <span class="item-quantity">${quantity}x</span>
-                            <span class="item-name">${item.name}</span>
+                            <span class="item-quantity">${cartItem.quantity}x</span>
+                            <span class="item-name">${itemName}</span>
                         </div>
                         <span class="item-total-price">S/ ${itemTotal.toFixed(2)}</span>
                     `;
@@ -488,19 +557,40 @@
                 alert("Tu carrito está vacío. Agrega productos para continuar.");
                 return;
             }
+
+            const customerName = document.getElementById('customer-name').value.trim();
+            if (!customerName) {
+                alert("Por favor, ingresa tu nombre para continuar.");
+                return;
+            }
+
+            const paymentMethod = document.querySelector('input[name="payment"]:checked');
+            if (!paymentMethod) {
+                alert("Por favor, selecciona un método de pago.");
+                return;
+            }
             
-            let message = `¡Hola *El Secreto del Sabor (${AppData.locales[state.selectedLocal].name})*! 👋\n\nQuisiera hacer el siguiente pedido:\n\n`;
+            let message = `¡Hola *El Secreto del Sabor (${AppData.locales[state.selectedLocal].name})*! 👋\n\n`;
+            message += `*Cliente:* ${customerName}\n\n`;
+            message += `Quisiera hacer el siguiente pedido:\n\n`;
             let total = 0;
 
             for (const id in state.cart) {
+                const cartItem = state.cart[id];
                 const item = AppData.menu.flatMap(cat => cat.items).find(i => i.id === id);
-                message += `*${state.cart[id]}x* ${item.name}\n`;
-                total += item.price * state.cart[id];
+                let itemName = item.name;
+                if (cartItem.choice) {
+                    itemName += ` (${cartItem.choice})`;
+                }
+                message += `*${cartItem.quantity}x* ${itemName}\n`;
+                total += item.price * cartItem.quantity;
             }
             
             const deliveryType = document.getElementById('delivery-options').value;
             message += `\n*Total: S/ ${total.toFixed(2)}*\n`;
             message += `\n*Tipo de Entrega:* ${deliveryType === 'recojo' ? 'Recoger en Local' : 'Delivery'}\n`;
+            message += `*Método de Pago:* ${paymentMethod.value}\n`;
+
             if(deliveryType === 'delivery') {
                 message += `\n_(Espero la coordinación para compartir mi ubicación y conocer el costo del envío)._\n`;
             }
@@ -513,7 +603,39 @@
             window.open(whatsappUrl, '_blank');
         }
 
+        function goToCartStep(stepNumber) {
+            state.cartStep = stepNumber;
+            document.querySelectorAll('.cart-step').forEach(step => {
+                step.classList.remove('active-step');
+            });
+            document.getElementById(`cart-step-${stepNumber}`).classList.add('active-step');
+        }
+
+        function selectDrink(choice) {
+            const itemId = state.currentItemId;
+            let quantity = state.cart[itemId] ? state.cart[itemId].quantity : 0;
+            quantity++;
+            
+            state.cart[itemId] = { quantity: quantity, choice: choice };
+            
+            updateQuantityDisplay(itemId);
+            updateCartCount();
+            closeModal('drink-choice-modal');
+            state.currentItemId = null;
+        }
+
+        function selectJuice(choice) {
+            const itemId = state.currentItemId;
+            let quantity = state.cart[itemId] ? state.cart[itemId].quantity : 0;
+            quantity++;
+            
+            state.cart[itemId] = { quantity: quantity, choice: choice };
+            
+            updateQuantityDisplay(itemId);
+            updateCartCount();
+            closeModal('juice-choice-modal');
+            state.currentItemId = null;
+        }
     </script>
 </body>
 </html>
-
