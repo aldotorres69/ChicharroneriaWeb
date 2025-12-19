@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
+<div id="nieve-contenedor"></div>
     <!-- PANTALLA DE BIENVENIDA -->
     <div id="splash-screen" class="splash">
         <div class="splash-logo-container">
@@ -636,6 +636,26 @@
             closeModal('juice-choice-modal');
             state.currentItemId = null;
         }
+    </script>
+
+    <script>
+        // --- INICIO NAVIDAD ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const snowContainer = document.getElementById('nieve-contenedor');
+            if (snowContainer) {
+                for (let i = 0; i < 40; i++) {
+                    const snowflake = document.createElement('div');
+                    snowflake.className = 'copo-nieve';
+                    snowflake.style.left = `${Math.random() * 100}vw`;
+                    snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                    snowflake.style.animationDelay = `${Math.random() * 5}s`;
+                    snowflake.style.opacity = Math.random() * 0.4 + 0.2;
+                    snowflake.style.fontSize = `${Math.random() * 7 + 8}px`;
+                    snowContainer.appendChild(snowflake);
+                }
+            }
+        });
+        // --- FIN NAVIDAD ---
     </script>
 </body>
 </html>

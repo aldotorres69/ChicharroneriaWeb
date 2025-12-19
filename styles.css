@@ -12,7 +12,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 .container {
-    /* max-width: 600px; */ /* Eliminado para permitir que se expanda en PC */
+    max-width: 600px;
     margin: 0 auto;
     min-height: 100vh;
     position: relative;
@@ -71,10 +71,6 @@ header {
     top: 0;
     z-index: 10;
     border-bottom: 1px solid rgba(250, 204, 21, 0.1);
-    display: flex; /* Añadido para usar flexbox */
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    flex-direction: column; /* Apila los elementos para que el status quede debajo del wrapper */
 }
 .header-content-wrapper {
     display: flex;
@@ -539,113 +535,6 @@ nav {
     color: #2c0b0e;
 }
 
-/* --- MEDIA QUERIES PARA TABLETS Y PC (min-width: 768px) --- */
-@media (min-width: 768px) {
-    body {
-      /* Asegurarnos de que el body no tenga un ancho máximo */
-      max-width: 100%;
-      /* Eliminar cualquier padding horizontal */
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    .container {
-        /* Eliminado max-width para permitir que el contenido ocupe el 100% del ancho */
-        margin: 0; /* Eliminar margen para ocupar el 100% del ancho */
-    }
-
-    /* Y que el contenedor principal crezca */
-    main#menu-container {
-      /* Asegurarnos de que el main tampoco tenga ancho máximo */
-      max-width: 100%;
-      /* Añadir padding horizontal para que el contenido se aleje de los bordes */
-      padding-left: 40px;
-      padding-right: 40px;
-    }
-
-    main {
-        padding: 0; /* Eliminar padding horizontal para ocupar el 100% del ancho */
-    }
-
-    main {
-        padding: 0; /* Eliminar padding horizontal para ocupar el 100% del ancho */
-    }
-
-    .modal-content {
-        max-width: 500px;
-    }
-
-    .category-nav-container {
-        justify-content: center; /* Centra los elementos de la barra de categorías */
-    }
-
-    /* Modificaciones para el layout de productos en PC */
-    .category {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr; /* Tres columnas */
-        gap: 20px; /* Espacio entre categorías y productos */
-    }
-
-    .category-title {
-        grid-column: 1 / -1; /* El título ocupa todo el ancho */
-    }
-
-    .category-banner {
-        grid-column: 1 / -1; /* El banner ocupa todo el ancho */
-    }
-
-    .menu-item-text {
-        display: flex; /* Mantener flex para el contenido interno del item */
-        flex-direction: column; /* Apilar info y acciones */
-        align-items: flex-start;
-        padding: 15px;
-        border: 1px solid #4a1d21;
-        border-radius: 10px;
-        background-color: #3a1215;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .menu-item-text:hover {
-        transform: translateY(-3px);
-    }
-
-    .menu-item-text .item-info {
-        width: 100%;
-        padding-right: 0;
-        margin-bottom: 10px;
-    }
-
-    .menu-item-text .item-info h3 {
-        font-size: 1.2rem; /* Ajuste de tamaño de fuente para el nombre del producto */
-    }
-
-    .menu-item-text .item-info p {
-        font-size: 0.9rem; /* Ajuste de tamaño de fuente para la descripción del producto */
-    }
-
-    .menu-item-text .item-price-view {
-        font-size: 1.3rem; /* Ajuste de tamaño de fuente para el precio del producto */
-    }
-
-    .menu-item-text .item-price-view {
-        align-self: flex-end; /* Alinea el precio a la derecha */
-        margin-top: auto; /* Empuja el precio hacia abajo */
-    }
-
-    .menu-item-text .item-actions-order {
-        width: 100%;
-        justify-content: space-between; /* Distribuye los botones y cantidad */
-        margin-top: 10px;
-    }
-
-    /* Ajuste para la barra de navegación inferior en PC */
-    nav {
-        max-width: 1200px; /* Permite que la barra se extienda */
-        margin: 0 auto; /* Centra la barra */
-    }
-}
-
 /* --- CUSTOMER DETAILS & CART STEPS --- */
 .cart-step {
     display: none;
@@ -700,17 +589,43 @@ nav {
     margin-top: 15px;
 }
 
-/* Ajustes para el botón flotante de WhatsApp */
-.item-solo:last-child {
-  border-bottom: none !important;
-}
 
-nav {
-  background: none !important;
-  border-top: none !important;
+/* --- INICIO NAVIDAD --- */
+#nieve-contenedor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
 }
-
-/* Oculta el botón de pedido inferior SOLO si estamos en "order-mode" */
-body.order-mode #order-button {
-  display: none;
+.copo-nieve {
+    position: absolute;
+    top: -20px;
+    color: #fff;
+    user-select: none;
+    font-size: 16px;
+    animation: fall linear infinite;
 }
+.copo-nieve::before {
+    content: '❄️';
+}
+@keyframes fall {
+    to {
+        transform: translateY(105vh);
+    }
+}
+.category-title::before {
+    content: '🎄';
+    margin-right: 10px;
+}
+.cart-step h2::before {
+    content: '✨';
+    margin-right: 10px;
+}
+.confirm-button::after {
+    content: '🎁';
+    margin-left: 10px;
+}
+/* --- FIN NAVIDAD --- */
